@@ -137,7 +137,11 @@ npm test
 Créé pour le cours DevOps - Session 2025-2026
 
 ---
+## 👤 Student
 
+Dually Dagobert
+
+---
 ## 📄 Licence
 
 MIT

@@ -11,7 +11,7 @@
 #
 # ============================================================================
 
-version: '3.8'
+version: "3.8"
 
 # ============================================================================
 # SECTION 1: SERVICES
@@ -20,19 +20,18 @@ version: '3.8'
 # Cette application a 2 services: web (Node.js) et db (PostgreSQL)
 
 services:
-
   # ====================================================================
   # SERVICE 1: Application Web (Node.js)
   # ====================================================================
   web:
     # Construire l'image à partir du Dockerfile
     build:
-      context: .              # Dossier parent (où se trouve le Dockerfile)
-      dockerfile: ???         # Tâche: Quel est le chemin du Dockerfile?
+      context: . # Dossier parent (où se trouve le Dockerfile)
+      dockerfile: ??? # Tâche: Quel est le chemin du Dockerfile?
 
     # Nom du conteneur (pour faciliter les tests/debug)
     # Conseil: Utilisez votre nom pour personnaliser
-    container_name: ???        # Tâche: expense-tracker-nodejs ou expense-tracker-[votre nom sans esoace ou vos initiales]
+    container_name: ??? # Tâche: expense-tracker-nodejs-Dually-Dagobert
 
     # Charger les variables d'environnement depuis .env.docker
     # En local: Docker Compose charge depuis .env.docker
@@ -45,22 +44,22 @@ services:
     # Mappage des ports
     # Format: "port_externe:port_interne"
     ports:
-      - "???:???"              # Tâche: Mapper les ports
+      - "???:???" # Tâche: Mapper les ports
 
     # Variables d'environnement (configuration du conteneur)
     environment:
       NODE_ENV: ${NODE_ENV:-production}
-      
+
       # DATABASE_URL: Chaîne de connexion PostgreSQL
       # Important: L'hôte DOIT être le nom du service (pas localhost)
-      DATABASE_URL: ???        # Tâche: Construire connexion PostgreSQL
-      
+      DATABASE_URL: ??? # Tâche: Construire connexion PostgreSQL
+
       # Variables individuelles
-      DB_HOST: ???             # Tâche: Nom du service?
-      DB_PORT: ???             # Tâche: Port?
-      DB_NAME: ???             # Tâche: Nom base?
-      DB_USER: ???             # Tâche: Utilisateur?
-      DB_PASSWORD: ???         # Tâche: Mot de passe?
+      DB_HOST: ??? # Tâche: Nom du service?
+      DB_PORT: ??? # Tâche: Port?
+      DB_NAME: ??? # Tâche: Nom base?
+      DB_USER: ??? # Tâche: Utilisateur?
+      DB_PASSWORD: ??? # Tâche: Mot de passe?
 
     # Attendre que PostgreSQL soit prêt
     depends_on:
@@ -72,42 +71,42 @@ services:
 
     # Réseau personnalisé (pour que les services se trouvent)
     networks:
-      - ???                     # Tâche: Nom du réseau?
-
+      - ??? # Tâche: Nom du réseau?
 
   # ====================================================================
   # SERVICE 2: Base de données PostgreSQL
   # ====================================================================
   db:
     # Image Docker officielle PostgreSQL
-    image: ???                 # Tâche: Quelle variante PostgreSQL utiliser?
-                               # Conseil: Cherchez sur hub.docker.com
+    image:
+      ??? # Tâche: Quelle variante PostgreSQL utiliser?
+      # Conseil: Cherchez sur hub.docker.com
 
     # Nom du conteneur
-    container_name: ???        # Tâche: Nommez le conteneur PostgreSQL
+    container_name: ??? # Tâche: Nommez le conteneur PostgreSQL
 
     # Configuration PostgreSQL
     environment:
       # Mot de passe du superutilisateur
       # Cette même valeur doit être utilisée dans DATABASE_URL
-      POSTGRES_PASSWORD: ???   # Tâche: Mot de passe?
-      
+      POSTGRES_PASSWORD: ??? # Tâche: Mot de passe?
+
       # Nom de la base de données à créer
-      POSTGRES_DB: ???         # Tâche: Nom base données?
-      
+      POSTGRES_DB: ??? # Tâche: Nom base données?
+
       # Utilisateur PostgreSQL par défaut
-      POSTGRES_USER: ???       # Tâche: Utilisateur PostgreSQL?
+      POSTGRES_USER: ??? # Tâche: Utilisateur PostgreSQL?
 
     # Volumes: Persistence des données
     # Un volume = stockage durable même si conteneur arrêté
     # Format: "nom_volume:chemin_dans_conteneur"
     volumes:
-      - ???:/var/lib/postgresql/data  # Tâche: Nom volume?
+      - ???:/var/lib/postgresql/data # Tâche: Nom volume?
 
     # Health check: Vérifie si PostgreSQL est prêt
     # Permet au service web de savoir quand se connecter
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -117,8 +116,7 @@ services:
 
     # Réseau personnalisé
     networks:
-      - ???                     # Tâche: Même réseau que service web
-
+      - ??? # Tâche: Même réseau que service web
 
 # ============================================================================
 # SECTION 2: VOLUMES
@@ -126,9 +124,8 @@ services:
 # Volumes nommés: Stockage persistant pour les données de la base de données
 
 volumes:
-  ???:                         # Tâche: Définir volume (nom utilisé plus haut)?
+  ???: # Tâche: Définir volume (nom utilisé plus haut)?
     driver: local
-
 
 # ============================================================================
 # SECTION 3: NETWORKS
@@ -136,9 +133,8 @@ volumes:
 # Réseau personnalisé: Permet aux services de se communiquer par leurs noms
 
 networks:
-  ???:                         # Tâche: Nom du réseau (utilisé dans les services)?
+  ???: # Tâche: Nom du réseau (utilisé dans les services)?
     driver: bridge
-
 
 # ============================================================================
 # NOTES PÉDAGOGIQUES (Module 7: Docker Compose + Module 9: Gestion d'environnement)
@@ -320,7 +316,7 @@ networks:
 # PARTIE 7: Checklist étudiant
 # ============================================================================
 #
-# ☐ Créer .env.docker à la racine du projet? 
+# ☐ Créer .env.docker à la racine du projet?
 # ☐ Remplir DB_USER, DB_PASSWORD, DB_NAME avec vos valeurs?
 # ☐ Compléter les ??? dans ce fichier docker-compose.yml?
 # ☐ Valider avec: docker compose config
